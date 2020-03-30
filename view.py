@@ -33,6 +33,10 @@ class editorPanel(bpy.types.Panel):
             # nothing selected
             layout.label(text="Selected an object first.")
             return None
+        elif selected_objs[0].active_material is None:
+            # no active material
+            layout.label(text="Need a material first.")
+            return None
 
         # object name
         # TODO: build the selection object list
