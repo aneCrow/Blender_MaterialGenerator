@@ -19,13 +19,6 @@ class NODE_PT_test_sockets_info(bpy.types.Panel):
         # ----------
         target = bpy.context.active_node
 
-        def socketInfoLayout(sockets, layout):
-            for socket in sockets:
-                index = list(sockets).index(socket)
-                layout.prop(socket, "name", text=str(index))
-                layout.prop(socket, "bl_idname", text="")
-                layout.separator()
-
         # ----------
         # layout
         # ----------
@@ -33,8 +26,28 @@ class NODE_PT_test_sockets_info(bpy.types.Panel):
         if target is None:
             return None
         # layout.operator("view.test", text="test")
+        layout.prop(target, "bl_idname", text="Type")
         layout.prop(target, "name")
-        layout.prop(target, "bl_idname", text="")
+
+        def socketInfoLayout(sockets, layout):
+            for socket in sockets:
+                index = list(sockets).index(socket)
+                # row 1
+                row = layout.row()
+                row.prop(socket, "enabled", text="# "+str(index))
+                row2 = row.row()
+                row2.scale_x = 1.65
+                row2.prop(socket, "bl_idname", text="")
+                # row 2
+                row = layout.row()
+                row.prop(socket, "hide")
+                row2 = row.row()
+                row2.scale_x = 1.65
+                row2.prop(socket, "name", text="")
+                row.enabled = socket.enabled
+
+                layout.separator()
+
         box = layout.box()
         box.label(text="INPUTs")
         socketInfoLayout(target.inputs, box)
