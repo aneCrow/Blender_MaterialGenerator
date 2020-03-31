@@ -48,10 +48,10 @@ class editorPanel(bpy.types.Panel):
         row = layout.row(align=True)
         row.operator("yt_shader.empty_struct",
                      text="Empty Struct")
-        row.operator("yt_shader.octane",
-                     text="Octane")
         row.operator("yt_shader.eevee",
                      text="Eevee")
+        row.operator("yt_shader.octane",
+                     text="Octane")
 
         layout.separator()
 

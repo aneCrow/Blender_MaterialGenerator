@@ -13,7 +13,7 @@
 
 from . import view
 from . import operators
-from . import build_shader
+from . import shader_struct_generator
 bl_info = {
     "name": "Shader Generator (Octane & Eevee)",
     "author": "aneCrow",
@@ -29,10 +29,10 @@ bl_info = {
 def register():
     view.register()
     operators.register()
-    build_shader.register()
+    shader_struct_generator.register()
 
 
 def unregister():
     view.unregister()
     operators.unregister()
-    build_shader.unregister()
+    shader_struct_generator.unregister()
