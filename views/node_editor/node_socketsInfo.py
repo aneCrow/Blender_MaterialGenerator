@@ -2,6 +2,59 @@ import bpy
 
 
 # ------------------------------------------------------------------------
+# panel props func
+# ------------------------------------------------------------------------
+def getStrProo():
+    materials = bpy.data.materials
+    if len(materials) == 0:
+        return None
+    query_nodes = [
+        x for x in materials[0].node_tree.nodes if x.name == "String Prop"
+    ]
+    if len(query_nodes) == 0:
+        return None
+    store_node = query_nodes[0]
+    if len(store_node.outputs) == 0:
+        store_node.outputs.new("NodeSocketString", "String Prop")
+    elif len(store_node.outputs) == 1:
+        return store_node.outputs["String Prop"]
+    else:
+        return None
+
+
+# ------------------------------------------------------------------------
+# panel layout func
+# ------------------------------------------------------------------------
+def getSocketInfo(sockets, layout):
+    for socket in sockets:
+        index = list(sockets).index(socket)
+        # row 1
+        row = layout.row()
+        row.prop(socket, "enabled", text="# "+str(index))
+        row2 = row.row()
+        row2.scale_x = 1.65
+        row2.prop(socket, "bl_idname", text="")
+        # row 2
+        row = layout.row()
+        row.prop(socket, "hide")
+        row2 = row.row()
+        row2.scale_x = 1.65
+        row2.prop(socket, "name", text="")
+        row.enabled = socket.enabled
+
+        layout.separator()
+
+
+def getButtonAddSocket(operator, prop_type, layout):
+    row = layout.row()
+    # TODO: add function
+    row.operator(operator, text="+")
+    row2 = row.row()
+    row2.scale_x = 1.65
+    row2.prop(prop_type, "default_value", text="Type")
+
+
+# ------------------------------------------------------------------------
 # panel class
 # ------------------------------------------------------------------------
 class NODE_PT_test_sockets_info(bpy.types.Panel):
@@ -18,6 +71,8 @@ class NODE_PT_test_sockets_info(bpy.types.Panel):
         # props
         # ----------
         target = bpy.context.active_node
+        # set a data store node
+        prop_type = getStrProo()
 
         # ----------
         # layout
@@ -25,35 +80,27 @@ class NODE_PT_test_sockets_info(bpy.types.Panel):
         layout = self.layout
         if target is None:
             return None
-        # layout.operator("view.test", text="test")
+        # layout.operator("util.test", text="test")
         layout.prop(target, "bl_idname", text="Type")
         layout.prop(target, "name")
 
-        def socketInfoLayout(sockets, layout):
-            for socket in sockets:
-                index = list(sockets).index(socket)
-                # row 1
-                row = layout.row()
-                row.prop(socket, "enabled", text="# "+str(index))
-                row2 = row.row()
-                row2.scale_x = 1.65
-                row2.prop(socket, "bl_idname", text="")
-                # row 2
-                row = layout.row()
-                row.prop(socket, "hide")
-                row2 = row.row()
-                row2.scale_x = 1.65
-                row2.prop(socket, "name", text="")
-                row.enabled = socket.enabled
-
-                layout.separator()
-
+        # input sockets
         box = layout.box()
         box.label(text="INPUTs")
-        socketInfoLayout(target.inputs, box)
+        # list
+        getSocketInfo(target.inputs, box)
+        # add button
+        if prop_type is not None:
+            getButtonAddSocket("util.test", prop_type, box)
+
+        # output sockets
         box = layout.box()
         box.label(text="OUTPUTs")
-        socketInfoLayout(target.outputs, box)
+        # list
+        getSocketInfo(target.outputs, box)
+        # add button
+        if prop_type is not None:
+            getButtonAddSocket("util.test", prop_type, box)
 
 
 # ------------------------------------------------------------------------
