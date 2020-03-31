@@ -13,8 +13,13 @@
 
 from . import util
 from . import view
-from . import operators
+from .views.node_editor import node_socketsInfo
 from . import shader_struct_generator
+
+
+# ------------------------------------------------------------------------
+# addon head info
+# ------------------------------------------------------------------------
 bl_info = {
     "name": "Shader Generator (Octane & Eevee)",
     "author": "aneCrow",
@@ -27,15 +32,22 @@ bl_info = {
 }
 
 
+# ------------------------------------------------------------------------
+# register and unregister
+# ------------------------------------------------------------------------
+modules = [
+    util,
+    view,
+    shader_struct_generator,
+    node_socketsInfo
+]
+
+
 def register():
-    util.register()
-    view.register()
-    # operators.register()
-    shader_struct_generator.register()
+    for c in modules:
+        c.register()
 
 
 def unregister():
-    util.unregister()
-    view.unregister()
-    # operators.unregister()
-    shader_struct_generator.unregister()
+    for c in modules:
+        c.unregister()
