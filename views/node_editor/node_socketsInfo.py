@@ -38,6 +38,7 @@ class NODE_PT_test_sockets_info(bpy.types.Panel):
         box = layout.box()
         box.label(text="INPUTs")
         socketInfoLayout(target.inputs, box)
+        box = layout.box()
         box.label(text="OUTPUTs")
         socketInfoLayout(target.outputs, box)
 
