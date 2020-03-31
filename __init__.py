@@ -11,6 +11,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+from . import util
 from . import view
 from . import operators
 from . import shader_struct_generator
@@ -27,12 +28,14 @@ bl_info = {
 
 
 def register():
+    util.register()
     view.register()
-    operators.register()
+    # operators.register()
     shader_struct_generator.register()
 
 
 def unregister():
+    util.unregister()
     view.unregister()
-    operators.unregister()
+    # operators.unregister()
     shader_struct_generator.unregister()
