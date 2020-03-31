@@ -35,7 +35,7 @@ class editorPanel(bpy.types.Panel):
             return None
         elif selected_objs[0].active_material is None:
             # no active material
-            layout.label(text="Need a material first.")
+            layout.label(text="Require active material.")
             return None
 
         # object name

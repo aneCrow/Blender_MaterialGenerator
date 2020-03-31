@@ -24,10 +24,9 @@ def linkInGroupNodes(shader_node, outout_node, input_node, root, num):
             root.links.new(shader_node.inputs[item], input_node.outputs[index])
 
         if isinstance(item, list):
-            root.links.new(
-                shader_node.inputs[item[0]], input_node.outputs[index])
-            root.links.new(
-                shader_node.inputs[item[1]], input_node.outputs[index])
+            for su_item in item:
+                root.links.new(shader_node.inputs[su_item],
+                               input_node.outputs[index])
 
         # if isinstance(item, str):
         #     root.inputs.new("NodeSocketString", item)
@@ -36,6 +35,7 @@ def linkInGroupNodes(shader_node, outout_node, input_node, root, num):
 def createNodes(num, targetType):
     target = bpy.context.selected_objects[0]
     active_material_tree = target.active_material.node_tree
+
     offset = 1500 * num
     # create shader output
     shader_output = active_material_tree.nodes.new("ShaderNodeOutputMaterial")

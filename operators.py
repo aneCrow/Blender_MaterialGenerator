@@ -1,3 +1,6 @@
+# this code forked from github aditiapratama/cycles-octane-converter
+# https://github.com/aditiapratama/cycles-octane-converter
+
 import bpy
 
 
