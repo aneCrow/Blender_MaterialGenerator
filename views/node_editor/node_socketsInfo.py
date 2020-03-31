@@ -1,7 +1,9 @@
 import bpy
 
 
-# panel render enter class
+# ------------------------------------------------------------------------
+# panel class
+# ------------------------------------------------------------------------
 class NODE_PT_test_sockets_info(bpy.types.Panel):
     """panel of node sockets info"""
     bl_idname = "NODE_PT_test_sockets_info"
@@ -17,6 +19,13 @@ class NODE_PT_test_sockets_info(bpy.types.Panel):
         # ----------
         target = bpy.context.active_node
 
+        def socketInfoLayout(sockets, layout):
+            for socket in sockets:
+                index = list(sockets).index(socket)
+                layout.prop(socket, "name", text=str(index))
+                layout.prop(socket, "bl_idname", text="")
+                layout.separator()
+
         # ----------
         # layout
         # ----------
@@ -25,34 +34,19 @@ class NODE_PT_test_sockets_info(bpy.types.Panel):
             return None
         # layout.operator("view.test", text="test")
         layout.prop(target, "name")
-        layout.prop(target, "bl_idname")
+        layout.prop(target, "bl_idname", text="")
         box = layout.box()
-        box.label(text="inputs")
-        box.label(text="putputs")
-
-
-# test operator
-class testOperator(bpy.types.Operator):
-    """test"""
-    bl_idname = "view.test"
-    bl_label = "test"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        print("test operator")
-
-        test = bpy.context.material.name
-        print(test)
-
-        return {'FINISHED'}
+        box.label(text="INPUTs")
+        socketInfoLayout(target.inputs, box)
+        box.label(text="OUTPUTs")
+        socketInfoLayout(target.outputs, box)
 
 
 # ------------------------------------------------------------------------
 # register and unregister
 # ------------------------------------------------------------------------
 classes = [
-    NODE_PT_test_sockets_info,
-    testOperator
+    NODE_PT_test_sockets_info
 ]
 
 
