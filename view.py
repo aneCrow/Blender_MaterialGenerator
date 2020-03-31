@@ -28,7 +28,6 @@ class editorPanel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        util.panel_node(layout)
 
         selected_objs = bpy.context.selected_objects
         if len(selected_objs) == 0:
