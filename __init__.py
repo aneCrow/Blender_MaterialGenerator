@@ -32,6 +32,14 @@ bl_info = {
 # ------------------------------------------------------------------------
 # UI root
 # ------------------------------------------------------------------------
+class root:
+    def register():
+        bpy.utils.register_class(NODE_PT_root)
+
+    def unregister():
+        bpy.utils.unregister_class(NODE_PT_root)
+
+
 class NODE_PT_root(bpy.types.Panel):
     """Panel Of Generator"""
     bl_idname = "NODE_PT_root"
@@ -42,31 +50,24 @@ class NODE_PT_root(bpy.types.Panel):
     bl_label = "Generator"
 
     def draw(self, context):
-        modules.view.main_layout(self.layout)
-
-
-class root:
-    def register():
-        bpy.utils.register_class(NODE_PT_root)
-
-    def unregister():
-        bpy.utils.unregister_class(NODE_PT_root)
+        from .modules.view import main_layout
+        main_layout(self.layout)
 
 
 # ------------------------------------------------------------------------
 # register and unregister
 # ------------------------------------------------------------------------
-modules = [
+items = [
     root,
     modules
 ]
 
 
 def register():
-    for c in modules:
+    for c in items:
         c.register()
 
 
 def unregister():
-    for c in modules:
+    for c in items:
         c.unregister()

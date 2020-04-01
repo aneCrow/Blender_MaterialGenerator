@@ -4,17 +4,17 @@ from . import node_socketsInfo
 # ------------------------------------------------------------------------
 # register and unregister
 # ------------------------------------------------------------------------
-modules = [
+items = [
     util,
     node_socketsInfo
 ]
 
 
 def register():
-    for c in modules:
+    for c in items:
         c.register()
 
 
 def unregister():
-    for c in modules:
+    for c in items:
         c.unregister()
