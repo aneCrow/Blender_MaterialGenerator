@@ -11,11 +11,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from . import util
-from . import view
-from .views.node_editor import node_socketsInfo
-from . import shader_struct_generator
-
+from . import main_panel
+from . import test
 
 # ------------------------------------------------------------------------
 # addon head info
@@ -36,10 +33,8 @@ bl_info = {
 # register and unregister
 # ------------------------------------------------------------------------
 modules = [
-    util,
-    view,
-    shader_struct_generator,
-    node_socketsInfo
+    main_panel,
+    test
 ]
 
 

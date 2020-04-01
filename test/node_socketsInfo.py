@@ -4,7 +4,7 @@ import bpy
 # ------------------------------------------------------------------------
 # panel props func
 # ------------------------------------------------------------------------
-def getStrProo():
+def getStrProp():
     materials = bpy.data.materials
     if len(materials) == 0:
         return None
@@ -26,19 +26,22 @@ def getStrProo():
 # panel layout func
 # ------------------------------------------------------------------------
 def getSocketInfo(sockets, layout):
+    if len(sockets) == 0:
+        layout.enabled = False
+        layout.label(text="- nothing")
     for socket in sockets:
         index = list(sockets).index(socket)
         # row 1
         row = layout.row()
         row.prop(socket, "enabled", text="# "+str(index))
         row2 = row.row()
-        row2.scale_x = 1.65
+        row2.scale_x = 1.5
         row2.prop(socket, "bl_idname", text="")
         # row 2
         row = layout.row()
         row.prop(socket, "hide")
         row2 = row.row()
-        row2.scale_x = 1.65
+        row2.scale_x = 1.5
         row2.prop(socket, "name", text="")
         row.enabled = socket.enabled
 
@@ -72,7 +75,7 @@ class NODE_PT_test_sockets_info(bpy.types.Panel):
         # ----------
         target = bpy.context.active_node
         # set a data store node
-        prop_type = getStrProo()
+        prop_type = getStrProp()
 
         # ----------
         # layout
