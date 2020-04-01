@@ -11,8 +11,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from . import main_panel
-from . import test
+import bpy
+from . import modules
 
 # ------------------------------------------------------------------------
 # addon head info
@@ -30,11 +30,35 @@ bl_info = {
 
 
 # ------------------------------------------------------------------------
+# UI root
+# ------------------------------------------------------------------------
+class NODE_PT_root(bpy.types.Panel):
+    """Panel Of Generator"""
+    bl_idname = "NODE_PT_root"
+    bl_space_type = 'NODE_EDITOR'
+    bl_region_type = 'UI'
+    bl_category = 'Generator'
+    bl_context = 'root'
+    bl_label = "Generator"
+
+    def draw(self, context):
+        modules.view.main_layout(self.layout)
+
+
+class root:
+    def register():
+        bpy.utils.register_class(NODE_PT_root)
+
+    def unregister():
+        bpy.utils.unregister_class(NODE_PT_root)
+
+
+# ------------------------------------------------------------------------
 # register and unregister
 # ------------------------------------------------------------------------
 modules = [
-    main_panel,
-    test
+    root,
+    modules
 ]
 
 
