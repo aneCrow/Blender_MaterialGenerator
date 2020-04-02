@@ -1,20 +1,20 @@
-from . import util
-from . import node_socketsInfo
+from . import ui
+from . import op
 
 # ------------------------------------------------------------------------
 # register and unregister
 # ------------------------------------------------------------------------
 items = [
-    util,
-    node_socketsInfo
+    ui,
+    op
 ]
 
 
 def register():
-    for c in items:
-        c.register()
+    for i in items:
+        i.register()
 
 
 def unregister():
-    for c in items:
-        c.unregister()
+    for i in items:
+        i.unregister()
