@@ -18,9 +18,9 @@ from . import modules
 # addon head info
 # ------------------------------------------------------------------------
 bl_info = {
-    "name": "Shader Generator (Octane & Eevee)",
+    "name": "Material Generator (Octane & Eevee)",
     "author": "aneCrow",
-    "description": "Build Octane/Eevee shader node tree automatic.",
+    "description": "Build Octane/Eevee material node tree automatic.",
     "blender": (2, 81, 0),
     "version": (0, 0, 1),
     "location": "",
@@ -32,42 +32,41 @@ bl_info = {
 # ------------------------------------------------------------------------
 # UI root
 # ------------------------------------------------------------------------
-class root:
-    def register():
-        bpy.utils.register_class(NODE_PT_root)
+# class root:
+#     def register():
+#         bpy.utils.register_class(NODE_PT_root)
 
-    def unregister():
-        bpy.utils.unregister_class(NODE_PT_root)
+#     def unregister():
+#         bpy.utils.unregister_class(NODE_PT_root)
 
 
-class NODE_PT_root(bpy.types.Panel):
-    """Panel Of Generator"""
-    bl_idname = "NODE_PT_root"
-    bl_space_type = 'NODE_EDITOR'
-    bl_region_type = 'UI'
-    bl_category = 'Generator'
-    bl_context = 'root'
-    bl_label = "Generator"
+# class NODE_PT_root(bpy.types.Panel):
+#     """Panel Of Generator"""
+#     bl_idname = "NODE_PT_root"
+#     bl_space_type = 'NODE_EDITOR'
+#     bl_region_type = 'UI'
+#     bl_category = 'Generator'
+#     bl_context = 'root'
+#     bl_label = "Generator"
 
-    def draw(self, context):
-        from .modules.view import main_layout
-        main_layout(self.layout)
+#     def draw(self, context):
+#         from .view import main_layout
+#         main_layout(self.layout)
 
 
 # ------------------------------------------------------------------------
 # register and unregister
 # ------------------------------------------------------------------------
 items = [
-    root,
     modules
 ]
 
 
 def register():
-    for c in items:
-        c.register()
+    for i in items:
+        i.register()
 
 
 def unregister():
-    for c in items:
-        c.unregister()
+    for i in items:
+        i.unregister()

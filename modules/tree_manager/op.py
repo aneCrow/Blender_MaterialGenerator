@@ -3,43 +3,23 @@ from bpy.utils import register_class, unregister_class
 
 
 # ------------------------------------------------------------------------
-# panel class
+# operator class
 # ------------------------------------------------------------------------
-class NODE_PT_(bpy.types.Panel):
-    """"""
-    bl_idname = "NODE_PT_"
-    bl_space_type = "NODE_EDITOR"
-    bl_region_type = "UI"
-    bl_category = ""
-    bl_context = ""
+class _Operator(bpy.types.Operator):
+    """..."""
+    bl_idname = "."
     bl_label = ""
 
-    @classmethod
-    def poll(cls, context):
-        return (context.object is not None)
+    def execute(self, context):
 
-    def draw_header(self, context):
-        ...
-
-    def draw_header_preset(self, context):
-        ...
-
-    def draw(self, context):
-        # ----------
-        # props
-        # ----------
-
-        # ----------
-        # layout
-        # ----------
-        layout = self.layout
+        return {'FINISHED'}
 
 
 # ------------------------------------------------------------------------
 # register and unregister
 # ------------------------------------------------------------------------
 classes = [
-    NODE_PT_
+    _Operator
 ]
 
 

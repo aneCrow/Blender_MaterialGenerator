@@ -27,6 +27,7 @@ def getStrProp():
 # ------------------------------------------------------------------------
 def getSocketInfo(sockets, layout):
     if len(sockets) == 0:
+        return None
         layout.enabled = False
         layout.label(text="- nothing")
     for socket in sockets:
@@ -74,6 +75,8 @@ class NODE_PT_test_sockets_info(bpy.types.Panel):
         # props
         # ----------
         target = bpy.context.active_node
+        if target is None:
+            return None
         # set a data store node
         prop_type = getStrProp()
 
@@ -81,11 +84,16 @@ class NODE_PT_test_sockets_info(bpy.types.Panel):
         # layout
         # ----------
         layout = self.layout
-        if target is None:
-            return None
         # layout.operator("util.test", text="test")
+        layout.prop(target, "parent")
         layout.prop(target, "bl_idname", text="Type")
         layout.prop(target, "name")
+        layout.prop(target, "label")
+        layout.prop(target, "hide")
+        layout.prop(target, "show_options")
+        layout.prop(target, "show_preview")
+        layout.prop(target, "use_custom_color")
+        layout.prop(target, "color")
 
         # input sockets
         box = layout.box()
