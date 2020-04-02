@@ -6,7 +6,7 @@ from bpy.utils import register_class, unregister_class
 # panel class
 # ------------------------------------------------------------------------
 class NODE_PT_(bpy.types.Panel):
-    """..."""
+    """"""
     bl_idname = "NODE_PT_"
     bl_space_type = "NODE_EDITOR"
     bl_region_type = "UI"
