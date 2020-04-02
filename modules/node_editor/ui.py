@@ -132,6 +132,7 @@ class NODE_PT_EDITOT(bpy.types.Panel):
         mapSocketsLayout(outputs,
                          layout.box(),
                          "Outputs")
+        # TODO: add links and options map layout
 
 
 # ------------------------------------------------------------------------
