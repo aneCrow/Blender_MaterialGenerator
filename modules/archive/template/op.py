@@ -6,10 +6,17 @@ from bpy.utils import register_class, unregister_class
 # operator class
 # ------------------------------------------------------------------------
 class _Operator(bpy.types.Operator):
-    """..."""
+    """"""
     bl_idname = "."
     bl_label = ""
 
+    # ----------
+    # props
+    # ----------
+
+    # ----------
+    # execute
+    # ----------
     def execute(self, context):
 
         return {'FINISHED'}
