@@ -7,7 +7,7 @@ from bpy.utils import register_class, unregister_class
 # ------------------------------------------------------------------------
 class PrintNode_Operator(bpy.types.Operator):
     """print node"""
-    bl_idname = "node.print_self"
+    bl_idname = "node_editor.print_self"
     bl_label = "print node"
 
     def execute(self, context):
@@ -17,7 +17,7 @@ class PrintNode_Operator(bpy.types.Operator):
 
 class AddSocket_Operator(bpy.types.Operator):
     """add socket"""
-    bl_idname = "node.add_socket"
+    bl_idname = "node_editor.add_socket"
     bl_label = "add socket"
 
     # ----------

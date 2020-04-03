@@ -49,7 +49,7 @@ def mapSocketsLayout(sockets: bpy.types.NodeInputs,
     # props
     # ----------
     has_sockets = len(sockets) != 0
-    add_socket_operator = "node.add_socket"
+    add_socket_operator = "node_editor.add_socket"
     props = bpy.context.scene.NodeEditor_Props
     prop_name = "addButton_socketTypeE"
     socket_type = Static.socket_types[int(props.addButton_socketTypeE)]
@@ -87,9 +87,9 @@ def mapSocketsLayout(sockets: bpy.types.NodeInputs,
     row.prop(props, prop_name, text="")
 
 
-class NODE_PT_EDITOT(bpy.types.Panel):
+class NODE_PT_Editor(bpy.types.Panel):
     """Node Editor"""
-    bl_idname = "NODE_PT_EDITOT"
+    bl_idname = "NODE_PT_Editor"
     bl_space_type = "NODE_EDITOR"
     bl_region_type = "UI"
     bl_category = "Item"
@@ -111,7 +111,7 @@ class NODE_PT_EDITOT(bpy.types.Panel):
         # ----------
         layout = self.layout
 
-        layout.operator("node.print_self", text="test")
+        layout.operator("node_editor.print_self", text="test")
         layout.prop(target, "parent")
         layout.prop(target, "bl_idname", text="Type")
 
@@ -140,7 +140,7 @@ class NODE_PT_EDITOT(bpy.types.Panel):
 # ------------------------------------------------------------------------
 classes = [
     NodeEditor_Props,
-    NODE_PT_EDITOT
+    NODE_PT_Editor
 ]
 
 
